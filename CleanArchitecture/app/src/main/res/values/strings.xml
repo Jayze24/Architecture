@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CleanArchitecture</string>
+    <string name="title_activity_professor">ActivityProfessor</string>
+    <string name="title_activity_topic">ActivityTopic</string>
+</resources>
