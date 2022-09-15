@@ -55,10 +55,26 @@ class ActivityClazz : ComponentActivity() {
                             showDialog.value = null
                         }
                     ) {
+                        val listClazzStudent by viewModelClazz.getFlowListClazzStudent.observeAsState()
                         Column(modifier = Modifier.background(MaterialTheme.colors.surface)) {
                             Text(text = "CLASS INFO")
                             Text(text = "name : ${showDialog.value?.name}")
                             Text(text = "capacity : ${showDialog.value?.capacity}")
+                            Spacer(modifier = Modifier.height(16.dp))
+
+                            LazyColumn(modifier = Modifier
+                                .fillMaxWidth()
+                                .height(200.dp)) {
+                                listClazzStudent?.also {
+                                    itemsIndexed(it) { index, item ->
+                                        Text(
+                                            modifier = Modifier.padding(4.dp),
+                                            text = "No.${index} name : ${item.name}, grade : ${item.grade}"
+                                        )
+                                    }
+                                }
+                            }
+
                             Spacer(modifier = Modifier.height(16.dp))
                             Row {
                                 Button(
@@ -135,11 +151,12 @@ class ActivityClazz : ComponentActivity() {
                                 androidx.compose.material3.Button(
                                     onClick = {
                                         if (item is DataClazz) {
+                                            viewModelClazz.searchClazz(item.id)
                                             showDialog.value = item
                                         }
                                     }
                                 ) {
-                                    Text(text = "학생 추가")
+                                    Text(text = "상세 보기")
                                 }
                             }
                         }

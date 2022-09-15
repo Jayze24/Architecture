@@ -57,8 +57,9 @@ object ModuleUseCase {
 
     @Provides
     fun provideUseCaseGetFlowClazzStudent(
+        @DispatcherIO dispatcher: CoroutineDispatcher,
         repository: BoundaryClazzStudent
-    ) : UseCaseGetFlowListClazzStudent = UseCaseGetFlowListClazzStudent(repository = repository)
+    ) : UseCaseGetFlowListClazzStudent = UseCaseGetFlowListClazzStudent(dispatcher, repository)
 
     @Provides
     fun provideUseCaseGetFlowListProfessor(
