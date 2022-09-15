@@ -6,11 +6,14 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import space.jay.cleanarchitecture.domain.boundary.BoundaryClazz
+import space.jay.cleanarchitecture.domain.boundary.BoundaryClazzStudent
 import space.jay.cleanarchitecture.domain.boundary.BoundaryLogin
 import space.jay.cleanarchitecture.domain.boundary.BoundaryUser
 import space.jay.cleanarchitecture.domain.useCase.clazz.UseCaseAddStudent
 import space.jay.cleanarchitecture.domain.useCase.clazz.UseCaseDeleteClazz
+import space.jay.cleanarchitecture.domain.useCase.clazz.UseCaseGetFlowClazzInfo
 import space.jay.cleanarchitecture.domain.useCase.clazz.UseCaseGetFlowListClazz
+import space.jay.cleanarchitecture.domain.useCase.clazz.UseCaseGetFlowListClazzStudent
 import space.jay.cleanarchitecture.domain.useCase.clazz.UseCaseInsertClazz
 import space.jay.cleanarchitecture.domain.useCase.profess.UseCaseGetFlowListProfessor
 import space.jay.cleanarchitecture.domain.useCase.profess.UseCaseGetFlowProfessor
@@ -25,7 +28,7 @@ object ModuleUseCase {
     @Provides
     fun provideUseCaseAddStudent(
         @DispatcherIO dispatcher: CoroutineDispatcher,
-        repository: BoundaryClazz,
+        repository: BoundaryClazzStudent,
     ): UseCaseAddStudent = UseCaseAddStudent(dispatcher, repository)
 
     @Provides
@@ -45,6 +48,16 @@ object ModuleUseCase {
         @DispatcherIO dispatcher: CoroutineDispatcher,
         repository: BoundaryClazz,
     ): UseCaseInsertClazz = UseCaseInsertClazz(dispatcher, repository)
+
+    @Provides
+    fun provideUseCaseGetFlowClazzInfo(
+        repository: BoundaryClazz
+    ) : UseCaseGetFlowClazzInfo = UseCaseGetFlowClazzInfo(repository = repository)
+
+    @Provides
+    fun provideUseCaseGetFlowClazzStudent(
+        repository: BoundaryClazzStudent
+    ) : UseCaseGetFlowListClazzStudent = UseCaseGetFlowListClazzStudent(repository = repository)
 
     @Provides
     fun provideUseCaseGetFlowListProfessor(

@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import space.jay.cleanarchitecture.ui.theme.CleanArchitectureTheme
-import space.jay.cleanarchitecture.ui.view.clazz.ActivityClazz
+import space.jay.cleanarchitecture.ui.view.clazz.list.ActivityClazz
 import space.jay.cleanarchitecture.ui.view.professor.ActivityProfessor
 import space.jay.cleanarchitecture.ui.view.topic.ActivityTopic
 

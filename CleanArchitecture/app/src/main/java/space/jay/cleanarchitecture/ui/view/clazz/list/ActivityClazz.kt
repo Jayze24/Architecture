@@ -1,10 +1,12 @@
-package space.jay.cleanarchitecture.ui.view.clazz
+package space.jay.cleanarchitecture.ui.view.clazz.list
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -32,6 +34,8 @@ import androidx.compose.ui.window.Dialog
 import dagger.hilt.android.AndroidEntryPoint
 import space.jay.cleanarchitecture.data.repository.room.data.DataClazz
 import space.jay.cleanarchitecture.ui.theme.CleanArchitectureTheme
+import space.jay.cleanarchitecture.ui.view.clazz.detail.ActivityClazzInfo
+import space.jay.cleanarchitecture.ui.view.clazz.detail.EXTRA_CLAZZ_ID
 
 @AndroidEntryPoint
 class ActivityClazz : ComponentActivity() {
@@ -51,22 +55,32 @@ class ActivityClazz : ComponentActivity() {
                             showDialog.value = null
                         }
                     ) {
-                        Column {
+                        Column(modifier = Modifier.background(MaterialTheme.colors.surface)) {
                             Text(text = "CLASS INFO")
-                            Text(text = "name : ${showDialog.value!!.name}")
-                            Text(text = "capacity : ${showDialog.value!!.capacity}")
+                            Text(text = "name : ${showDialog.value?.name}")
+                            Text(text = "capacity : ${showDialog.value?.capacity}")
                             Spacer(modifier = Modifier.height(16.dp))
                             Row {
                                 Button(
                                     onClick = {
-                                        viewModelClazz.delete(showDialog.value!!.id)
+                                        showDialog.value?.id?.also {
+                                            viewModelClazz.delete(it)
+                                        }
                                         showDialog.value = null
                                     }
                                 ) {
                                     Text(text = "Delete")
                                 }
                                 Spacer(modifier = Modifier.width(8.dp))
-                                Button(onClick = { }) {
+                                Button(
+                                    onClick = {
+                                        startActivity(
+                                            Intent(this@ActivityClazz, ActivityClazzInfo::class.java).apply {
+                                                putExtra(EXTRA_CLAZZ_ID, showDialog.value?.id)
+                                            }
+                                        )
+                                    }
+                                ) {
                                     Text(text = "Add Student")
                                 }
                                 Spacer(modifier = Modifier.width(8.dp))
@@ -120,7 +134,9 @@ class ActivityClazz : ComponentActivity() {
                                 Text(text = item.name, fontSize = 14.sp, modifier = Modifier.padding(vertical = 4.dp))
                                 androidx.compose.material3.Button(
                                     onClick = {
-
+                                        if (item is DataClazz) {
+                                            showDialog.value = item
+                                        }
                                     }
                                 ) {
                                     Text(text = "상세보기")

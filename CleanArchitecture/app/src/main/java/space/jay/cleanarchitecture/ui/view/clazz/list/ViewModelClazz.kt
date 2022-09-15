@@ -1,4 +1,4 @@
-package space.jay.cleanarchitecture.ui.view.clazz
+package space.jay.cleanarchitecture.ui.view.clazz.list
 
 import androidx.lifecycle.asLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,8 +19,7 @@ import javax.inject.Inject
 class ViewModelClazz @Inject constructor(
     private val useCaseGetFlowListClazz: UseCaseGetFlowListClazz,
     private val useCaseInsertClazz: UseCaseInsertClazz,
-    private val useCaseDeleteClazz: UseCaseDeleteClazz,
-    private val useCaseAddStudent: UseCaseAddStudent
+    private val useCaseDeleteClazz: UseCaseDeleteClazz
 ) : BaseViewModel() {
 
     val getFlowListClazz = useCaseGetFlowListClazz().asLiveData()
@@ -45,12 +44,6 @@ class ViewModelClazz @Inject constructor(
     fun delete(id: Long) {
         launchWithIO {
             useCaseDeleteClazz(id)
-        }
-    }
-
-    fun addStudent(idClazz: Long, idStudent: List<Long>) {
-        launchWithIO {
-            useCaseAddStudent(idClazz, idStudent)
         }
     }
 

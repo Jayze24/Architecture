@@ -18,6 +18,9 @@ interface DaoClazz {
     @Query("SELECT * FROM clazz WHERE name LIKE '%' || :name || '%' ")
     fun getFlowListClazz(name: String?): Flow<List<DataClazz>>
 
+    @Query("SELECT * FROM clazz WHERE id = :id")
+    fun getFlowClazz(id: Long): Flow<DataClazz>
+
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(data: DataClazz): Long
 
@@ -26,4 +29,7 @@ interface DaoClazz {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addStudent(vararg data: DataRelationClassAndStudent)
+
+    @Query("SELECT * FROM user INNER JOIN relationClassAndStudent AS re ON re.idClass = :id WHERE user.id = re.idStudent")
+    fun getFlowListClassStudent(id: Long): Flow<List<DataUser>>
 }

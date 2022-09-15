@@ -51,6 +51,7 @@ abstract class DatabaseSchool : RoomDatabase() {
                 instance?.let { database ->
                     scope.launch(Dispatchers.IO) {
                         initUser(database.daoUser())
+                        initClazz(database.daoClazz())
                     }
                 }
             }
@@ -73,6 +74,10 @@ abstract class DatabaseSchool : RoomDatabase() {
                 password = "aaaaaa",
                 type = TypeUser.STUDENT,
                 grade = 2))
+        }
+
+        suspend fun initClazz(daoClazz: DaoClazz) {
+            daoClazz.insert(DataClazz(name = "Dream Class", capacity = 30))
         }
     }
 

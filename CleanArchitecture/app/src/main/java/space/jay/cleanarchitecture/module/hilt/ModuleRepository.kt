@@ -8,6 +8,7 @@ import space.jay.cleanarchitecture.data.repository.RepositoryClazz
 import space.jay.cleanarchitecture.data.repository.RepositoryUser
 import space.jay.cleanarchitecture.data.repository.RepositoryUnsplash
 import space.jay.cleanarchitecture.domain.boundary.BoundaryClazz
+import space.jay.cleanarchitecture.domain.boundary.BoundaryClazzStudent
 import space.jay.cleanarchitecture.domain.boundary.BoundaryLogin
 import space.jay.cleanarchitecture.domain.boundary.BoundaryUnsplash
 import space.jay.cleanarchitecture.domain.boundary.BoundaryUser
@@ -24,6 +25,9 @@ abstract class ModuleRepository {
 
     @Binds
     abstract fun bindBoundaryClazz(repositoryClazz: RepositoryClazz): BoundaryClazz
+
+    @Binds
+    abstract fun bindBoundaryClazzStudent(repositoryClazz: RepositoryClazz): BoundaryClazzStudent
 
     @Binds
     abstract fun bindBoundaryUnsplash(repositoryUnsplash: RepositoryUnsplash): BoundaryUnsplash

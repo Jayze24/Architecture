@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.asLiveData
@@ -64,13 +65,13 @@ class ActivityLogin : ComponentActivity() {
 
                     Spacer(modifier = Modifier.padding(top = 32.dp))
 
-                    val email = rememberSaveable(stateSaver = TextFieldValue.Saver) { mutableStateOf(TextFieldValue()) }
+                    val email = rememberSaveable(stateSaver = TextFieldValue.Saver) { mutableStateOf(TextFieldValue("test@test.com")) }
                     TextField(
                         modifier = Modifier
                             .padding(horizontal = 24.dp)
                             .fillMaxWidth()
                             .wrapContentHeight(),
-                        label = { Text(text = "이메일", color = Color.Gray) },
+                        label = { Text(text = "email", color = Color.Gray) },
                         value = email.value,
                         onValueChange = {
                             email.value = it
@@ -79,17 +80,18 @@ class ActivityLogin : ComponentActivity() {
 
                     Spacer(modifier = Modifier.padding(top = 16.dp))
 
-                    val password = rememberSaveable(stateSaver = TextFieldValue.Saver) { mutableStateOf(TextFieldValue()) }
+                    val password = rememberSaveable(stateSaver = TextFieldValue.Saver) { mutableStateOf(TextFieldValue("aaaaaa")) }
                     TextField(
                         modifier = Modifier
                             .padding(horizontal = 24.dp)
                             .fillMaxWidth()
                             .wrapContentHeight(),
-                        label = { Text(text = "비밀번호", color = Color.Gray) },
+                        label = { Text(text = "password", color = Color.Gray) },
                         value = password.value,
                         onValueChange = {
                             password.value = it
                         },
+                        visualTransformation = PasswordVisualTransformation(),
                         keyboardOptions = KeyboardOptions.Default.copy(
                             keyboardType = KeyboardType.Password
                         )
