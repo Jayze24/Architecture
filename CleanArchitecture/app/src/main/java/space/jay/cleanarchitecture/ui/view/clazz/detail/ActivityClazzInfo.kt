@@ -46,7 +46,7 @@ class ActivityClazzInfo : ComponentActivity() {
                                 ?: "No Class Name")
                     Text(text = "capacity : ${clazzInfo?.capacity}")
 
-                    val listClazzStudent by viewModelClazzInfo.getFlowListClazzStudent.observeAsState()
+                    val listClazzStudent by viewModelClazzInfo.getFlowListStudent.observeAsState()
                     LazyColumn(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -65,10 +65,10 @@ class ActivityClazzInfo : ComponentActivity() {
                                     Text(text = "No.$index ${item.name}", fontSize = 14.sp, modifier = Modifier.padding(vertical = 4.dp))
                                     Button(
                                         onClick = {
-
+                                            viewModelClazzInfo.addStudent(item.id)
                                         }
                                     ) {
-                                        Text(text = "삭제")
+                                        Text(text = "추가")
                                     }
                                 }
                             }

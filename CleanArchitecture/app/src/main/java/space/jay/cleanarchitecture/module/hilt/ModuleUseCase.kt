@@ -17,6 +17,7 @@ import space.jay.cleanarchitecture.domain.useCase.clazz.UseCaseGetFlowListClazzS
 import space.jay.cleanarchitecture.domain.useCase.clazz.UseCaseInsertClazz
 import space.jay.cleanarchitecture.domain.useCase.profess.UseCaseGetFlowListProfessor
 import space.jay.cleanarchitecture.domain.useCase.profess.UseCaseGetFlowProfessor
+import space.jay.cleanarchitecture.domain.useCase.student.UseCaseGetFlowListStudent
 import space.jay.cleanarchitecture.domain.useCase.user.UseCaseDeleteUser
 import space.jay.cleanarchitecture.domain.useCase.user.UseCaseInsertUser
 import space.jay.cleanarchitecture.domain.useCase.user.UseCaseLogin
@@ -70,6 +71,12 @@ object ModuleUseCase {
         @DispatcherIO dispatcher: CoroutineDispatcher,
         repository: BoundaryUser,
     ): UseCaseGetFlowProfessor = UseCaseGetFlowProfessor(dispatcher, repository)
+
+    @Provides
+    fun provideUseCaseGetFlowListStudent(
+        @DispatcherIO dispatcher: CoroutineDispatcher,
+        repository: BoundaryUser,
+    ): UseCaseGetFlowListStudent = UseCaseGetFlowListStudent(dispatcher, repository)
 
     @Provides
     fun provideUseCaseInsertUser(

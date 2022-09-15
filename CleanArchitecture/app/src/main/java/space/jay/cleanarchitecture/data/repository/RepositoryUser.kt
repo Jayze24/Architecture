@@ -30,6 +30,13 @@ class RepositoryUser @Inject constructor(
             typeUser = typeUser
         )
 
+    override fun getFlowListStudent(name: String?, typeUser: Int): Flow<List<Student>> =
+        dataSourceUser.getFlowListStudent(
+            name = name
+                   ?: "",
+            typeUser = typeUser
+        )
+
     override suspend fun insert(data: User): Long {
         return dataSourceUser.insert(
             data = DataUser(

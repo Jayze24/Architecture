@@ -139,7 +139,7 @@ class ActivityClazz : ComponentActivity() {
                                         }
                                     }
                                 ) {
-                                    Text(text = "상세보기")
+                                    Text(text = "학생 추가")
                                 }
                             }
                         }

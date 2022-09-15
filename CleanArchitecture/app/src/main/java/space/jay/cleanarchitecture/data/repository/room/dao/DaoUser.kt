@@ -32,6 +32,12 @@ interface DaoUser {
     @Query("SELECT * FROM user WHERE id == :id And type == :typeUser")
     fun getFlowProfessor(id: Long, typeUser: Int): Flow<DataUser>
 
+    /**
+     * 학생
+     **/
+    @Query("SELECT * FROM user WHERE type = :typeUser AND name LIKE '%' || :name || '%' ")
+    fun getFlowListStudent(name: String, typeUser: Int): Flow<List<DataUser>>
+
 //    @Query("SELECT * FROM professor JOIN major ON professor.idMajor = major.id WHERE id = :id")
 //    override suspend fun getProfessor(id: Long): Map<EntityProfessor, EntityMajor>
 //

@@ -7,6 +7,7 @@ import space.jay.cleanarchitecture.base.BaseViewModel
 import space.jay.cleanarchitecture.domain.useCase.clazz.UseCaseAddStudent
 import space.jay.cleanarchitecture.domain.useCase.clazz.UseCaseGetFlowClazzInfo
 import space.jay.cleanarchitecture.domain.useCase.clazz.UseCaseGetFlowListClazzStudent
+import space.jay.cleanarchitecture.domain.useCase.student.UseCaseGetFlowListStudent
 import javax.inject.Inject
 
 const val EXTRA_CLAZZ_ID = "EXTRA_CLAZZ_ID"
@@ -16,17 +17,17 @@ class ViewModelClazzInfo @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val useCaseGetFlowClazzInfo: UseCaseGetFlowClazzInfo,
     private val useCaseAddStudent: UseCaseAddStudent,
-    private val useCaseGetFlowListClazzStudent: UseCaseGetFlowListClazzStudent
+    private val useCaseGetFlowListStudent: UseCaseGetFlowListStudent
 ) : BaseViewModel() {
 
     val idClazz = savedStateHandle.get<Long>(EXTRA_CLAZZ_ID) ?: -1
 
     val getFlowClazzInfo = useCaseGetFlowClazzInfo(idClazz).asLiveData()
-    val getFlowListClazzStudent = useCaseGetFlowListClazzStudent(idClazz).asLiveData()
+    val getFlowListStudent = useCaseGetFlowListStudent().asLiveData()
 
-    fun addStudent(idClazz: Long, idStudent: List<Long>) {
+    fun addStudent(idStudent: Long) {
         launchWithIO {
-            useCaseAddStudent(idClazz, idStudent)
+            useCaseAddStudent(idClazz, listOf(idStudent))
         }
     }
 
